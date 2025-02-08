@@ -112,9 +112,9 @@ public class TesteCampoTreinamento {
 	
 	@Test
 	public void deveInteragitComLink(){
-		driver.findElement(By.linkText("Voltar")).click();
-		
-		Assert.assertEquals("Voltou!", driver.findElement(By.id("resultado")).getText());
+		dsl.clicaLink("Voltar");
+
+		Assert.assertEquals("Voltou!", dsl.obterTextoById("resultado"));
 	}
 	
 	@Test
@@ -122,11 +122,9 @@ public class TesteCampoTreinamento {
 //		Assert.assertTrue(driver.findElement(By.tagName("body"))
 //				.getText().contains("Campo de Treinamento"));
 		
-		Assert.assertEquals("Campo de Treinamento",
-				driver.findElement(By.tagName("h3")).getText());
+		Assert.assertEquals("Campo de Treinamento", dsl.obterTexto(By.tagName("h3")));
 		
-		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...",
-				driver.findElement(By.className("facilAchar")).getText());
+		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...", dsl.obterTexto(By.className("facilAchar")));
 	}
 }
 

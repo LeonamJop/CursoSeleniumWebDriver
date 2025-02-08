@@ -1,3 +1,5 @@
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -53,5 +55,20 @@ public class DSL {
 	
 	public void clicaLink(String id) {
 		driver.findElement(By.linkText(id)).click();
+	}
+	
+	public String obterTexto(By by) {
+		return driver.findElement(by).getText();
+	}
+	
+	public String obterTextoById(String id) {
+		return obterTexto(By.id(id));
+	}
+	
+	public Number retornaTamanho(String id) {
+		WebElement esporte = driver.findElement(By.id(id));
+		Select esportes = new Select(esporte);
+		List<WebElement> allSelectedOptions = esportes.getAllSelectedOptions();
+		return allSelectedOptions.size();
 	}
 }
