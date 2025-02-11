@@ -16,13 +16,13 @@ public class DSL {
 		this.driver = driver;
 	}
 
-	public void escreveBy(By by, String texto) {
+	public void escreve(By by, String texto) {
 		driver.findElement(by).clear();
 		driver.findElement(by).sendKeys(texto);
 	}
 	
 	public void escreve(String id_campo, String texto) {
-		driver.findElement(By.id(id_campo)).sendKeys(texto);
+		escreve(By.id(id_campo), texto);
 	}
 	
 	public void apaga(String id_campo) {

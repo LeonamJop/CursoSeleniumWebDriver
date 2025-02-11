@@ -40,9 +40,6 @@ public class TesteCampoTreinamento {
 		dsl.escreve("elementosForm:nome", nome);
 		Assert.assertEquals(nome, dsl.obterValorCampo("elementosForm:nome"));
 		
-		dsl.apaga("elementosForm:nome");
-		Assert.assertEquals("", dsl.obterValorCampo("elementosForm:nome"));
-		
 		dsl.escreve("elementosForm:nome", novoNome);
 		Assert.assertEquals(novoNome, dsl.obterValorCampo("elementosForm:nome"));
 	}
