@@ -33,6 +33,21 @@ public class TesteCampoTreinamento {
 	}
 	
 	@Test
+	public void deveInteragirComTextFieldDuasVezes() {
+		String nome = "Leonam";
+		String novoNome = "Murilo";
+		
+		dsl.escreve("elementosForm:nome", nome);
+		Assert.assertEquals(nome, dsl.obterValorCampo("elementosForm:nome"));
+		
+		dsl.apaga("elementosForm:nome");
+		Assert.assertEquals("", dsl.obterValorCampo("elementosForm:nome"));
+		
+		dsl.escreve("elementosForm:nome", novoNome);
+		Assert.assertEquals(novoNome, dsl.obterValorCampo("elementosForm:nome"));
+	}
+	
+	@Test
 	public void deveInteragirComTextArea() {
 		dsl.escreve("elementosForm:sugestoes", "teste");
 		
@@ -95,9 +110,6 @@ public class TesteCampoTreinamento {
 	
 	@Test
 	public void deveBuscarTextoNaPagina(){
-//		Assert.assertTrue(driver.findElement(By.tagName("body"))
-//				.getText().contains("Campo de Treinamento"));
-		
 		Assert.assertEquals("Campo de Treinamento", dsl.obterTexto(By.tagName("h3")));
 		
 		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...", dsl.obterTexto(By.className("facilAchar")));

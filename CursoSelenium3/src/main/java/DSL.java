@@ -25,6 +25,10 @@ public class DSL {
 		driver.findElement(By.id(id_campo)).sendKeys(texto);
 	}
 	
+	public void apaga(String id_campo) {
+		driver.findElement(By.id(id_campo)).clear();
+	}
+	
 	@SuppressWarnings("deprecation")
 	public String obterValorCampo(String id_campo) {
 		return driver.findElement(By.id(id_campo)).getAttribute("value");
