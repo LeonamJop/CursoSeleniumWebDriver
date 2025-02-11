@@ -28,12 +28,12 @@ public class TesteJanelas {
 		dsl.clicaBotao("buttonPopUpEasy"); 
 		dsl.trocarJanela("Popup");
 		
-		dsl.escreveBy(By.tagName("textarea"), "Deu certo?");
+		dsl.escreve(By.tagName("textarea"), "Deu certo?");
 		
 		driver.close();
 		
 		dsl.trocarJanela("");
-		dsl.escreveBy(By.tagName("textarea"), "E agora?");
+		dsl.escreve(By.tagName("textarea"), "E agora?");
 	}
 	
 	@Test
@@ -41,9 +41,9 @@ public class TesteJanelas {
 		driver.findElement(By.id("buttonPopUpHard")).click();
 		
 		dsl.trocarJanela((String) driver.getWindowHandles().toArray()[1]);
-		dsl.escreveBy(By.tagName("textarea"), "Deu certo?");
+		dsl.escreve(By.tagName("textarea"), "Deu certo?");
 		
 		dsl.trocarJanela((String) driver.getWindowHandles().toArray()[0]);
-		dsl.escreveBy(By.tagName("textarea"), "E agora?");
+		dsl.escreve(By.tagName("textarea"), "E agora?");
 	}
 }
