@@ -1,5 +1,6 @@
 import java.util.List;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,10 @@ public class DSL {
 		this.driver = driver;
 	}
 
+	public void escreveBy(By by, String texto) {
+		driver.findElement(by).clear();
+		driver.findElement(by).sendKeys(texto);
+	}
 	
 	public void escreve(String id_campo, String texto) {
 		driver.findElement(By.id(id_campo)).sendKeys(texto);
@@ -40,6 +45,13 @@ public class DSL {
 		//combo.selectByIndex(2);
 		//combo.selectByValue("superior");
 		combo.selectByVisibleText(valor);
+	}
+	
+	public void desselecionarCombo(String id, String valor) {
+		WebElement element = driver.findElement(By.id(id));
+		
+		Select combo = new Select(element);
+		combo.deselectByVisibleText(valor);
 	}
 	
 	public String obterValorCombo(String id) {
@@ -70,5 +82,61 @@ public class DSL {
 		Select esportes = new Select(esporte);
 		List<WebElement> allSelectedOptions = esportes.getAllSelectedOptions();
 		return allSelectedOptions.size();
+	}
+	
+	public int obterQuantidadeOpcoesCombo(String id){
+		WebElement element = driver.findElement(By.id(id));
+		Select combo = new Select(element);
+		List<WebElement> options = combo.getOptions();
+		return options.size();
+	}
+	
+	public boolean verificarOpcaoCombo(String id, String opcao){
+		WebElement element = driver.findElement(By.id(id));
+		Select combo = new Select(element);
+		List<WebElement> options = combo.getOptions();
+		for(WebElement option: options) {
+			if(option.getText().equals(opcao)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public String alertaObterTextoEAceita(){
+		Alert alert = driver.switchTo().alert();
+		String valor = alert.getText();
+		alert.accept();
+		return valor;
+	}
+	
+	public String alertaObterTextoENega(){
+		Alert alert = driver.switchTo().alert();
+		String valor = alert.getText();
+		alert.dismiss();
+		return valor;
+	}
+	
+	public String alertaObterTexto() {
+		Alert alert = driver.switchTo().alert();
+		return alert.getText();
+	}
+	
+	public void alertaEscrever(String valor) {
+		Alert alert = driver.switchTo().alert();
+		alert.sendKeys(valor);
+		alert.accept();
+	}
+	
+	public void entrarFrame(String id) {
+		driver.switchTo().frame(id);
+	}
+	
+	public void sairFrame(){
+		driver.switchTo().defaultContent();
+	}
+	
+	public void trocarJanela(String id) {
+		driver.switchTo().window(id);
 	}
 }

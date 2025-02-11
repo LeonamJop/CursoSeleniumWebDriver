@@ -1,5 +1,3 @@
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -7,9 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 
 public class TesteCampoTreinamento {
 	
@@ -66,22 +62,8 @@ public class TesteCampoTreinamento {
 	
 	@Test
 	public void deveVerificarValoresCombo(){
-		WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
-		
-		Select combo = new Select(element);
-		List<WebElement> options = combo.getOptions();
-		
-		Assert.assertEquals(8, options.size());
-		
-		boolean encontrou = false;
-		for(WebElement option: options) {
-			if(option.getText().equals("Mestrado")){
-				encontrou = true;
-				break;
-			}
-		}
-		
-		Assert.assertTrue(encontrou);
+		Assert.assertEquals(8, dsl.obterQuantidadeOpcoesCombo("elementosForm:escolaridade"));
+		Assert.assertTrue(dsl.verificarOpcaoCombo("elementosForm:escolaridade", "Mestrado"));
 	}
 	
 	@Test
@@ -90,24 +72,18 @@ public class TesteCampoTreinamento {
 		dsl.selecionarCombo("elementosForm:esportes", "Corrida");
 		dsl.selecionarCombo("elementosForm:esportes", "O que eh esporte?");
 		
-		WebElement element = driver.findElement(By.id("elementosForm:esportes"));		
-		Select combo = new Select(element);
-		List<WebElement> allSelectedOptions = combo.getAllSelectedOptions();
-		Assert.assertEquals(3, allSelectedOptions.size());
+		Assert.assertEquals(3, dsl.retornaTamanho("elementosForm:esportes"));
 		
-		combo.deselectByVisibleText("Corrida");
+		dsl.desselecionarCombo("elementosForm:esportes", "Corrida");
 		
-		allSelectedOptions = combo.getAllSelectedOptions();
-		Assert.assertEquals(2, allSelectedOptions.size());
+		Assert.assertEquals(2, dsl.retornaTamanho("elementosForm:esportes"));
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void deveInteragitComBotoes(){
 		dsl.clicaBotao("buttonSimple");
 
-		WebElement botao = driver.findElement(By.id("buttonSimple"));
-		Assert.assertEquals("Obrigado!", botao.getAttribute("value"));
+		Assert.assertEquals("Obrigado!", dsl.obterValorCampo("buttonSimple"));
 	}
 	
 	@Test
