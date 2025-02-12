@@ -29,9 +29,8 @@ public class DSL {
 		driver.findElement(By.id(id_campo)).clear();
 	}
 	
-	@SuppressWarnings("deprecation")
 	public String obterValorCampo(String id_campo) {
-		return driver.findElement(By.id(id_campo)).getAttribute("value");
+		return driver.findElement(By.id(id_campo)).getDomProperty("value");
 	}
 	
 	public void clicarRadio(String id) {
@@ -46,8 +45,6 @@ public class DSL {
 		WebElement element = driver.findElement(By.id(id));
 		
 		Select combo = new Select(element);
-		//combo.selectByIndex(2);
-		//combo.selectByValue("superior");
 		combo.selectByVisibleText(valor);
 	}
 	

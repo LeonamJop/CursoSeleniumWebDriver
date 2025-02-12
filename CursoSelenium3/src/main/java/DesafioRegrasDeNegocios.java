@@ -10,6 +10,7 @@ public class DesafioRegrasDeNegocios {
 	
 	private WebDriver driver;
 	private DSL dsl;
+	private CampoTreinamentoPage page;
 	
 	@Before
 	public void inicializa() {
@@ -17,6 +18,7 @@ public class DesafioRegrasDeNegocios {
 		driver.manage().window().setSize(new Dimension(1200, 765));
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 		dsl = new DSL(driver);
+		page = new CampoTreinamentoPage(driver);
 	}
 	
 	@After
@@ -28,9 +30,9 @@ public class DesafioRegrasDeNegocios {
 	public void deveRetornarAvisoQuandoNomeForVazio(){	
 		String errorText = "Nome eh obrigatorio";
 		
-		Assert.assertEquals("", dsl.obterTextoById("elementosForm:nome"));
+		Assert.assertEquals("", page.getNome());
 		
-		dsl.clicaBotao("elementosForm:cadastrar");
+		page.cadastrar();
 		
 		Assert.assertEquals(errorText, dsl.alertaObterTextoEAceita());
 	}
@@ -40,8 +42,8 @@ public class DesafioRegrasDeNegocios {
 		String nome = "Leonam";
 		String errorText = "Sobrenome eh obrigatorio";
 		
-		dsl.escreve("elementosForm:nome", nome);
-		dsl.clicaBotao("elementosForm:cadastrar");
+		page.setNome(nome);
+		page.cadastrar();
 		
 		Assert.assertEquals(errorText, dsl.alertaObterTextoEAceita());
 	}
@@ -52,10 +54,10 @@ public class DesafioRegrasDeNegocios {
 		String sobreNome = "Silva";
 		String errorText = "Sexo eh obrigatorio";
 		
-		dsl.escreve("elementosForm:nome", nome);
-		dsl.escreve("elementosForm:sobrenome", sobreNome);
+		page.setNome(nome);
+		page.setSobrenome(sobreNome);
 		
-		dsl.clicaBotao("elementosForm:cadastrar");
+		page.cadastrar();
 		
 		Assert.assertEquals(errorText, dsl.alertaObterTextoEAceita());
 	}
@@ -66,15 +68,14 @@ public class DesafioRegrasDeNegocios {
 		String sobreNome = "Silva";
 		String errorText = "Tem certeza que voce eh vegetariano?";
 
-		dsl.escreve("elementosForm:nome", nome);
-		dsl.escreve("elementosForm:sobrenome", sobreNome);
+		page.setNome(nome);
+		page.setSobrenome(sobreNome);
+		page.setSexoMasculino();
 		
-		dsl.clicaBotao("elementosForm:sexo:0");
+		page.setComidaCarne();
+		page.setComidaVegano();
 		
-		dsl.clicaBotao("elementosForm:comidaFavorita:0");
-		dsl.clicaBotao("elementosForm:comidaFavorita:3");
-		
-		dsl.clicaBotao("elementosForm:cadastrar");
+		page.cadastrar();
 
 		Assert.assertEquals(errorText, dsl.alertaObterTextoEAceita());
 	}
@@ -83,19 +84,20 @@ public class DesafioRegrasDeNegocios {
 	public void deveRetornarAvisoQuandoEsporteENaoEsporteForSelecionado(){
 		String nome = "Leonam";
 		String sobreNome = "Silva";
+		String esporte = "Corrida";
+		String naoEhEsporte = "O que eh esporte?";
 		String errorText = "Voce faz esporte ou nao?";
+
+		page.setNome(nome);
+		page.setSobrenome(sobreNome);
+		page.setSexoMasculino();
+		page.setComidaPizza();
 		
-		dsl.escreve("elementosForm:nome", nome);
-		dsl.escreve("elementosForm:sobrenome", sobreNome);
-		dsl.clicaBotao("elementosForm:sexo:0");
-		dsl.clicaBotao("elementosForm:comidaFavorita:0");
+		page.setEsporte(esporte, naoEhEsporte);
 		
-		dsl.selecionarCombo("elementosForm:esportes", "Corrida");
-		dsl.selecionarCombo("elementosForm:esportes", "O que eh esporte?");
+		Assert.assertEquals(2, page.getQuantidadeEsportesSelecionados());
 		
-		Assert.assertEquals(2, dsl.retornaTamanho("elementosForm:esportes"));
-		
-		dsl.clicaBotao("elementosForm:cadastrar");
+		page.cadastrar();
 		
 		Assert.assertEquals(errorText, dsl.alertaObterTextoEAceita());
 	}

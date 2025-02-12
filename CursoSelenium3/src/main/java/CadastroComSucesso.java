@@ -9,14 +9,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class CadastroComSucesso {
 	
 	private WebDriver driver;
-	private DSL dsl; 
+	private CampoTreinamentoPage page;
 	
 	@Before
 	public void inicializa() {
 		driver = new ChromeDriver();
 		driver.manage().window().setSize(new Dimension(1200, 765));
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
-		dsl = new DSL(driver);
+		page = new CampoTreinamentoPage(driver);
 	}
 	
 	@After
@@ -33,36 +33,36 @@ public class CadastroComSucesso {
 		String escolaridade = "2o grau completo";
 		String escolaridadeAbrev = "2graucomp";
 		
-		dsl.escreve("elementosForm:nome", nome);
-		Assert.assertEquals(nome, dsl.obterValorCampo("elementosForm:nome"));
+		page.setNome(nome);
+		Assert.assertEquals(nome, page.getNome());
 		
-		dsl.escreve("elementosForm:sobrenome", sobrenome);
-		Assert.assertEquals(sobrenome, dsl.obterValorCampo("elementosForm:sobrenome"));
+		page.setSobrenome(sobrenome);
+		Assert.assertEquals(sobrenome, page.getSobrenome());
 		
-		dsl.clicarRadio("elementosForm:sexo:0");
-		Assert.assertTrue(dsl.isRadioMarcado("elementosForm:sexo:0"));
+		page.setSexoMasculino();
+		Assert.assertTrue(page.getSexoMasculino());
 		
-		dsl.clicarRadio("elementosForm:comidaFavorita:2");
-		Assert.assertTrue(dsl.isRadioMarcado("elementosForm:comidaFavorita:2"));
+		page.setComidaPizza();
+		Assert.assertTrue(page.getComidaPizza());
 		
-		dsl.selecionarCombo("elementosForm:escolaridade", escolaridade);
-		Assert.assertEquals(escolaridade, dsl.obterValorCombo("elementosForm:escolaridade"));
+		page.setEscolaridade(escolaridade);
+		Assert.assertEquals(escolaridadeAbrev, page.getEscolaridade());
 		
-		dsl.selecionarCombo("elementosForm:esportes", "Natacao");
-		dsl.selecionarCombo("elementosForm:esportes", "Corrida");
-		dsl.selecionarCombo("elementosForm:esportes", "Karate");
+		page.setEsporte("Natacao");
+		page.setEsporte("Corrida");
+		page.setEsporte("Karate");
 		
-		Assert.assertEquals(3, dsl.retornaTamanho("elementosForm:esportes"));
+		Assert.assertEquals(3, page.getQuantidadeEsportesSelecionados());
 
-		dsl.clicaBotao("elementosForm:cadastrar");
+		page.cadastrar();
 		
-		Assert.assertTrue(dsl.obterTextoById("resultado").startsWith("Cadastrado!"));
-		Assert.assertTrue(dsl.obterTextoById("descNome").endsWith(nome));
-		Assert.assertTrue(dsl.obterTextoById("descSobrenome").endsWith(sobrenome));
-		Assert.assertTrue(dsl.obterTextoById("descSexo").endsWith(sexo));
-		Assert.assertTrue(dsl.obterTextoById("descComida").endsWith(comida));
-		Assert.assertTrue(dsl.obterTextoById("descEscolaridade").endsWith(escolaridadeAbrev));
-		Assert.assertEquals("Esportes: Natacao Corrida Karate", dsl.obterTextoById("descEsportes"));
+		Assert.assertTrue(page.obterResultadoCadastro().startsWith("Cadastrado!"));
+		Assert.assertTrue(page.obterNomeCadastro().endsWith(nome));
+		Assert.assertTrue(page.obterSobrenomeCadastro().endsWith(sobrenome));
+		Assert.assertTrue(page.obterSexoCadastro().endsWith(sexo));
+		Assert.assertTrue(page.obterComidaCadastro().endsWith(comida));
+		Assert.assertTrue(page.obterEscolaridadeCadastro().endsWith(escolaridadeAbrev));
+		Assert.assertEquals("Esportes: Natacao Corrida Karate", page.obterEsportesCadastro());
 		
 	}
 }
