@@ -2,8 +2,10 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TesteFrames {
@@ -37,5 +39,21 @@ public class TesteFrames {
 		
 		dsl.sairFrame();
 		dsl.escreve("elementosForm:nome", txt);
+	}
+	
+	@Test
+	public void deveInteragirComFrameEscondido() {
+		WebElement frame = driver.findElement(By.id("frame2"));
+		dsl.executarJS("window.scrollBy(0, arguments[0])", frame.getLocation().y);
+		
+		dsl.entrarFrame("frame2");
+
+		
+		dsl.clicaBotao("frameButton");
+		
+		String mensagem =  dsl.alertaObterTextoEAceita();
+		String txt = "Frame OK!";
+		
+		Assert.assertEquals(txt, mensagem);
 	}
 }
