@@ -24,7 +24,7 @@ public class TesteCampoTreinamento {
 	
 	@After
 	public void finaliza() {
-		//driver.quit();
+		driver.quit();
 	}
 	
 	@Test
@@ -128,7 +128,10 @@ public class TesteCampoTreinamento {
 	
 	
 	
-	
+	@Test
+	public void deveClicarBotaoTabela() {
+		dsl.clicarBotaoTabela("Escolaridade", "Mestrado", "Botao", "elementosForm:tableUsuarios");
+	}
 	
 	
 	
