@@ -56,13 +56,12 @@ public class CadastroComSucesso {
 
 		page.cadastrar();
 		
-		Assert.assertTrue(page.obterResultadoCadastro().startsWith("Cadastrado!"));
-		Assert.assertTrue(page.obterNomeCadastro().endsWith(nome));
-		Assert.assertTrue(page.obterSobrenomeCadastro().endsWith(sobrenome));
-		Assert.assertTrue(page.obterSexoCadastro().endsWith(sexo));
-		Assert.assertTrue(page.obterComidaCadastro().endsWith(comida));
-		Assert.assertTrue(page.obterEscolaridadeCadastro().endsWith(escolaridadeAbrev));
-		Assert.assertEquals("Esportes: Natacao Corrida Karate", page.obterEsportesCadastro());
-		
+		Assert.assertEquals("Cadastrado!", page.obterResultadoCadastro());
+		Assert.assertEquals(nome, page.obterNomeCadastro());
+		Assert.assertEquals(sobrenome, page.obterSobrenomeCadastro());
+		Assert.assertEquals(sexo, page.obterSexoCadastro());
+		Assert.assertEquals(comida, page.obterComidaCadastro());
+		Assert.assertEquals(escolaridadeAbrev, page.obterEscolaridadeCadastro());
+		Assert.assertEquals("Natacao Corrida Karate", page.obterEsportesCadastro());
 	}
 }
