@@ -146,6 +146,13 @@ public class DSL {
 		driver.switchTo().window(id);
 	}
 	
+	/****ComboPrime****/
+	public void selecionarComboPrime(String radical, String valor) {
+		clicarRadio(By.xpath("//*[@id='"+radical+"_input']/../..//span"));
+		
+		clicarRadio(By.xpath("//*[@id='"+radical+"_items']//li[.='"+valor+"']"));
+	}
+	
 	/*************JS***************/
 	
 	public Object executarJS(String cmd, Object...param) {

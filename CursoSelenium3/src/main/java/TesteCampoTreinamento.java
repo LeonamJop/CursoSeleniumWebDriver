@@ -132,19 +132,5 @@ public class TesteCampoTreinamento {
 	public void deveClicarBotaoTabela() {
 		dsl.clicarBotaoTabela("Escolaridade", "Mestrado", "Botao", "elementosForm:tableUsuarios");
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
