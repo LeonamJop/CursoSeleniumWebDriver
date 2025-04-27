@@ -1,6 +1,4 @@
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,16 +40,15 @@ public class TesteSincronismo {
 		Assert.assertEquals("Deu certo?", dsl.obterValorCampo("novoCampo"));
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void deveUtilizarEsperaImplicita() throws InterruptedException {
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		
 		dsl.clicaBotao("buttonDelay");
 		
 		dsl.escreve("novoCampo", "Deu certo?");
 		
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
 		
 		Assert.assertEquals("Deu certo?", dsl.obterValorCampo("novoCampo"));
 	}
