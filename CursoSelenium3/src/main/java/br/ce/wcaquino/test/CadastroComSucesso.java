@@ -1,12 +1,15 @@
-import static br.ce.wcaquino.core.DriverFactory.getDriver;
-import static br.ce.wcaquino.core.DriverFactory.killDriver;
+package br.ce.wcaquino.test;
 
-import org.junit.After;
+import static br.ce.wcaquino.core.DriverFactory.getDriver;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CadastroComSucesso {
+import br.ce.wcaquino.core.BaseTest;
+import br.ce.wcaquino.page.CampoTreinamentoPage;
+
+public class CadastroComSucesso extends BaseTest {
 	
 	private CampoTreinamentoPage page;
 	
@@ -16,11 +19,6 @@ public class CadastroComSucesso {
 		page = new CampoTreinamentoPage();
 	}
 	
-	@After
-	public void finaliza() {
-		killDriver();
-	}
-
 	@Test
 	public void deveConcluirCadastro() {
 		String nome = "Leonam";

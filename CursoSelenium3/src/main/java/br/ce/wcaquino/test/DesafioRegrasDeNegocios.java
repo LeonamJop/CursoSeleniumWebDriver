@@ -1,3 +1,4 @@
+package br.ce.wcaquino.test;
 import static br.ce.wcaquino.core.DriverFactory.getDriver;
 import static br.ce.wcaquino.core.DriverFactory.killDriver;
 
@@ -5,7 +6,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import br.ce.wcaquino.core.DSL;
+import br.ce.wcaquino.page.CampoTreinamentoPage;
 
 public class DesafioRegrasDeNegocios {
 

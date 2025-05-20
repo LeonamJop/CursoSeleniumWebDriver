@@ -1,15 +1,9 @@
-import br.ce.wcaquino.core.DSL;
-
+package br.ce.wcaquino.page;
+import br.ce.wcaquino.core.BasePage;
 import org.openqa.selenium.By;
 
-public class CampoTreinamentoPage {
+public class CampoTreinamentoPage extends BasePage {
 
-	private DSL dsl;
-	
-	public CampoTreinamentoPage() {
-		dsl = new DSL();
-	}
-	
 	public void setNome(String nome) {		
 		dsl.escreve("elementosForm:nome", nome);
 	}
