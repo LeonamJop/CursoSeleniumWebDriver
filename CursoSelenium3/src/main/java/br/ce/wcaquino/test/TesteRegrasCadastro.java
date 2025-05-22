@@ -39,6 +39,7 @@ public class TesteRegrasCadastro extends BaseTest {
 	@Before
 	public void inicializa() {
 		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		dsl = new DSL();
 		page = new CampoTreinamentoPage();
 	}
 	
