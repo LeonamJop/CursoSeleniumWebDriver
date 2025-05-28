@@ -121,5 +121,6 @@
 	<classpathentry kind="lib" path="C:/Users/casad/OneDrive/Documentos/Leonam/selenium-java-4.27.0/selenium-safari-driver-4.27.0-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/casad/OneDrive/Documentos/Leonam/selenium-java-4.27.0/selenium-support-4.27.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/casad/OneDrive/Documentos/Leonam/selenium-java-4.27.0/selenium-support-4.27.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/casad/OneDrive/Documentos/Leonam/selenium-java-4.27.0/commons-io-2.16.1.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
